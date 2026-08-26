@@ -36,26 +36,9 @@ return {
         -- Annotations: start/resume first, then create and manage notes.
         { "<leader>as", desc = "Start annotation session" },
         { "<leader>ar", desc = "Resume annotation session" },
-        -- Visual annotation actions appear only while Mole has an active session.
-        -- Other Visual-mode actions, such as <leader>gs, remain available.
-        {
-          "<leader>ac",
-          desc = "Concise annotation",
-          mode = "v",
-          cond = function()
-            local ok, session = pcall(require, "mole.session")
-            return ok and session.state.active
-          end,
-        },
-        {
-          "<leader>am",
-          desc = "Multiline annotation",
-          mode = "v",
-          cond = function()
-            local ok, session = pcall(require, "mole.session")
-            return ok and session.state.active
-          end,
-        },
+        -- Visual annotation actions automatically start or resume Mole if needed.
+        { "<leader>ac", desc = "Concise annotation (starts session if needed)", mode = "v" },
+        { "<leader>am", desc = "Multiline annotation (starts session if needed)", mode = "v" },
         { "<leader>aq", desc = "Stop annotation session" },
         { "<leader>aw", desc = "Toggle annotation panel" },
 

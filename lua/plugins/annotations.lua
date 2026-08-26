@@ -36,7 +36,26 @@ return {
       local function resume() if configure() then mole.resume_session() end end
       vim.keymap.set("n", "<leader>as", start, { desc = "Start annotation session beside file" })
       vim.keymap.set("n", "<leader>ar", resume, { desc = "Resume annotation session beside file" })
+      local function ensure_session()
+        local session = require("mole.session")
+        if session.state.active then return true end
+
+        local source_win = vim.api.nvim_get_current_win()
+        if not configure() then return false end
+        mole.start_session()
+
+        -- Mole opens the side panel in the current window; return to the
+        -- selected Markdown buffer before capturing its Visual selection.
+        if vim.api.nvim_win_is_valid(source_win) then
+          vim.api.nvim_set_current_win(source_win)
+        end
+        return session.state.active
+      end
+      vim.keymap.set("v", "<leader>ac", function()
+        if ensure_session() then mole.annotate() end
+      end, { desc = "Add concise annotation" })
       vim.keymap.set("v", "<leader>am", function()
+        if not ensure_session() then return end
         mole.annotate()
         vim.schedule(function()
           vim.api.nvim_feedkeys(vim.keycode("<C-e>"), "t", false)

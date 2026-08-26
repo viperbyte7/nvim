@@ -16,6 +16,11 @@ end
 -- Display: <leader>d*
 map("n", "<leader>dn", function() vim.opt.relativenumber = not vim.opt.relativenumber:get() end,
   { desc = "Toggle relative numbers" })
+map("n", "<leader>dz", function()
+  local visible = vim.opt.number:get() or vim.opt.relativenumber:get()
+  vim.opt.number = not visible
+  vim.opt.relativenumber = false
+end, { desc = "Toggle all line numbers" })
 map("n", "<leader>dv", function() vim.opt.list = not vim.opt.list:get() end,
   { desc = "Toggle visible characters" })
 

@@ -32,6 +32,11 @@ menu.
   cr/ce/cn  Rose Pine / Everforest / Nightfox
   cs        Choose interactively
 
+<leader>d  Display
+  dn        Toggle relative numbers
+  dz        Toggle all line numbers
+  dv        Toggle visible characters
+
 <leader>g  Codex / AI
   gg        Toggle Codex terminal
   gf        Add current file

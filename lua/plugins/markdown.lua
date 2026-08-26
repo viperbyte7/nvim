@@ -9,6 +9,7 @@ return {
         width = 0.25,
         relative_width = true,
         auto_close = false,
+        auto_jump = true,
         focus_on_open = true,
         show_numbers = false,
         show_relative_numbers = false,
@@ -16,6 +17,7 @@ return {
       providers = { priority = { "markdown" } },
       guides = { enabled = true },
       symbol_folding = { autofold_depth = 1 },
+      preview_window = { auto_preview = true },
     },
   },
   {

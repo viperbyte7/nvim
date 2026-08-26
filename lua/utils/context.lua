@@ -90,7 +90,7 @@ local function related_annotations(source_file, start_line, end_line)
   return sidecar, blocks
 end
 
-local function visual_selection()
+function M.visual_selection()
   local bufnr = vim.api.nvim_get_current_buf()
   local start = vim.api.nvim_buf_get_mark(bufnr, "<")
   local finish = vim.api.nvim_buf_get_mark(bufnr, ">")
@@ -136,7 +136,9 @@ local function fence_for(text)
   return string.rep("`", math.max(3, longest + 1))
 end
 
-local function payload(selection, instruction, include_annotations)
+local function payload(selection, opts)
+  opts = opts or {}
+  local instruction = opts.instruction or ""
   local fence = fence_for(selection.text)
   local lines = {
     "# Neovim Context",
@@ -162,7 +164,16 @@ local function payload(selection, instruction, include_annotations)
     fence,
   }
 
-  if include_annotations then
+  if opts.annotation then
+    table.insert(lines, "")
+    table.insert(lines, "## New Mole annotation")
+    table.insert(lines, "")
+    table.insert(lines, "- Sidecar: " .. paths.annotation_file(selection.path))
+    table.insert(lines, "")
+    table.insert(lines, opts.annotation)
+  end
+
+  if opts.include_annotations then
     local sidecar, blocks = related_annotations(selection.path, selection.start_line, selection.end_line)
     table.insert(lines, "")
     table.insert(lines, "## Related Mole annotations")
@@ -190,19 +201,19 @@ function M.copy_selection(selection, opts)
     vim.notify("Select text from a named file first", vim.log.levels.WARN)
     return false
   end
-  local value = payload(selection, opts.instruction or "", opts.include_annotations == true)
+  local value = payload(selection, opts)
   vim.fn.setreg("+", value)
   vim.notify("Copied selection context to the system clipboard")
   return true
 end
 
 function M.copy_visual(opts)
-  return M.copy_selection(visual_selection(), opts)
+  return M.copy_selection(M.visual_selection(), opts)
 end
 
 function M.prompt_visual(opts)
   opts = opts or {}
-  local selection = visual_selection()
+  local selection = M.visual_selection()
   if not selection then
     vim.notify("Select text from a named file first", vim.log.levels.WARN)
     return false

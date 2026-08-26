@@ -59,7 +59,8 @@ menu.
   yp/yr/yd  Full / relative / containing folder
   ys        Copy selected text context
   yc        Copy selection, annotations, and prompted instruction
-  ya        Copy selection with related Mole annotations
+  ya        Annotate, save, and copy
+    c/m     Concise / multiline annotation, then copy
 ```
 
 ## Annotation workflow
@@ -72,9 +73,13 @@ or resumes automatically. Mole stores the review beside the source as:
 document.md.review.md
 ```
 
-Review files are intentionally ignored by Git. The `<leader>ya` and
-`<leader>yc` context actions read the adjacent `.review.md` sidecar and include
-only annotations whose recorded line range overlaps the selected text.
+Review files are intentionally ignored by Git. The `<leader>yc` context action
+reads the adjacent `.review.md` sidecar and includes only annotations whose
+recorded line range overlaps the selected text.
+
+The `<leader>yac` and `<leader>yam` actions start or resume Mole, collect a new
+concise or multiline annotation, write it to the sidecar, and then copy the
+original selection plus that new annotation to the clipboard.
 
 `<leader>yc` prompts for an instruction, then copies a Markdown payload to the
 system clipboard. It includes the full path, relative path, line and column

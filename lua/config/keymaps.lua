@@ -48,8 +48,6 @@ map("v", "<leader>ys", function() context.copy_visual() end,
   { desc = "Copy selected text context" })
 map("v", "<leader>yc", function() context.prompt_visual({ include_annotations = true }) end,
   { desc = "Copy selection, annotations, and instruction" })
-map("v", "<leader>ya", function() context.copy_visual({ include_annotations = true }) end,
-  { desc = "Copy selection with Mole annotations" })
 
 -- Markdown navigation: <leader>m*
 map("n", "<leader>mt", function()

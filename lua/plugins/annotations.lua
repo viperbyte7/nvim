@@ -6,6 +6,8 @@ return {
     keys = {
       { "<leader>ac", mode = "v", desc = "Concise annotation" },
       { "<leader>am", mode = "v", desc = "Multiline annotation" },
+      { "<leader>yac", mode = "v", desc = "Concise annotation, save, and copy" },
+      { "<leader>yam", mode = "v", desc = "Multiline annotation, save, and copy" },
       { "<leader>as", mode = "n", desc = "Start annotation session" },
       { "<leader>aq", mode = "n", desc = "Stop annotation session" },
       { "<leader>ar", mode = "n", desc = "Resume annotation session" },
@@ -61,6 +63,37 @@ return {
           vim.api.nvim_feedkeys(vim.keycode("<C-e>"), "t", false)
         end)
       end, { desc = "Add multiline annotation" })
+      local function annotate_and_copy(expanded)
+        local context = require("utils.context")
+        local context_selection = context.visual_selection()
+        if not context_selection or not ensure_session() then return end
+
+        local session = require("mole.session")
+        local selection = mole._capture_selection()
+        require("mole.input").show(mole.config, mole.config.capture_mode, selection, function(note, mode)
+          if note == nil then return end
+          if mode == "snippet" and not selection.text then
+            selection.text = mole._get_visual_text(
+              selection.start_line,
+              selection.start_col,
+              selection.end_line,
+              selection.end_col
+            )
+          end
+          require("mole.writer").append(session.state, mode, selection, note)
+          context.copy_selection(context_selection, { annotation = note })
+        end)
+
+        if expanded then
+          vim.schedule(function()
+            vim.api.nvim_feedkeys(vim.keycode("<C-e>"), "t", false)
+          end)
+        end
+      end
+      vim.keymap.set("v", "<leader>yac", function() annotate_and_copy(false) end,
+        { desc = "Concise annotation, save, and copy" })
+      vim.keymap.set("v", "<leader>yam", function() annotate_and_copy(true) end,
+        { desc = "Multiline annotation, save, and copy" })
       vim.api.nvim_create_user_command("MoleStartHere", start, { desc = "Start Mole beside current file" })
       vim.api.nvim_create_user_command("MoleResumeHere", resume, { desc = "Resume Mole beside current file" })
     end,

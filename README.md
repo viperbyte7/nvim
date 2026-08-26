@@ -76,12 +76,14 @@ does not read or write Mole. It is a temporary request packet for Codex,
 Claude, a terminal, or any other application.
 
 `<leader>yc` prompts for a one-line request, while `<leader>ym` opens a
-multiline request editor. In the multiline editor, use `<C-Enter>` to copy or
-`<Esc>`/`q` to cancel. Both actions copy a Markdown payload containing the full
-path, relative path, line and column range, timestamp, file type,
-modified-buffer status, selected text, and request. Paste it into Codex,
-Claude, a terminal, or any other application. Neovim does not start an AI
-process or make edits automatically.
+multiline request editor. The multiline editor is a temporary normal Neovim
+scratch buffer: start in Insert mode, press `<Esc>` to use Normal-mode motions
+and basic editing commands, then use `<C-Enter>` or `<leader><Enter>` to copy.
+Press `<Esc>` again in Normal mode, or `q`, to cancel. Both actions copy a
+Markdown payload containing the full path, relative path, line and column
+range, timestamp, file type, modified-buffer status, selected text, and
+request. Paste it into Codex, Claude, a terminal, or any other application.
+Neovim does not start an AI process or make edits automatically.
 
 ## Installation
 

@@ -168,11 +168,14 @@ function M.prompt_visual_multiline()
     border = "rounded",
     title = " Context request ",
     title_pos = "right",
-    footer = " <C-Enter> copy  <Esc>/q cancel ",
+    footer = " <C-Enter>/<leader><Enter> copy  <Esc>/q cancel ",
     footer_pos = "left",
   })
   vim.wo[win].wrap = true
   vim.wo[win].linebreak = true
+  vim.wo[win].number = false
+  vim.wo[win].relativenumber = false
+  vim.wo[win].signcolumn = "no"
   vim.cmd("startinsert")
 
   local closed = false
@@ -201,9 +204,15 @@ function M.prompt_visual_multiline()
     M.copy_selection(selection, { instruction = instruction })
   end
 
+  -- This is a normal scratch buffer, like Mole's expanded input. Keep the
+  -- standard insert/normal-mode editing commands available; only the small
+  -- set of request actions below is buffer-local.
   local map_opts = { buffer = buf, noremap = true, silent = true }
   vim.keymap.set({ "i", "n" }, "<C-CR>", confirm, map_opts)
-  vim.keymap.set({ "i", "n" }, "<Esc>", cancel, map_opts)
+  vim.keymap.set({ "i", "n" }, "<leader><CR>", confirm, map_opts)
+  -- In Insert mode <Esc> should enter Normal mode so motions and basic edits
+  -- work normally. Press <Esc> again in Normal mode to cancel, as in Mole.
+  vim.keymap.set("n", "<Esc>", cancel, map_opts)
   vim.keymap.set("n", "q", cancel, map_opts)
   return true
 end

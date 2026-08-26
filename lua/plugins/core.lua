@@ -15,7 +15,7 @@ return {
       delay = 250,
       -- Visual selections use direct actions such as <leader>a; keep the popup
       -- available for normal-mode discovery without interrupting annotation.
-      triggers = { { "<auto>", mode = "n" } },
+      triggers = { { "<auto>", mode = "n" }, { "<leader>a", mode = "v" } },
     },
     config = function(_, opts)
       local wk = require("which-key")

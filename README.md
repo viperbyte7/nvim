@@ -22,7 +22,8 @@ menu.
 
 ```text
 <leader>a  Annotations (Mole)
-  a         Annotate visual selection
+  ac        Concise annotation
+  am        Multiline annotation
   as/ar     Start/resume beside current file
   aq/aw     Stop/toggle panel
 

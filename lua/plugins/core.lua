@@ -26,6 +26,12 @@ return {
         { "<leader>m", group = "Markdown" }, { "<leader>o", group = "Open elsewhere" },
         { "<leader>p", group = "Project / search" }, { "<leader>w", group = "Writing" },
         { "<leader>y", group = "Copy paths" },
+        { "<leader>as", order = 1, desc = "Start annotation session" },
+        { "<leader>ar", order = 2, desc = "Resume annotation session" },
+        { "<leader>ac", order = 3, desc = "Concise annotation", mode = "v" },
+        { "<leader>am", order = 4, desc = "Multiline annotation", mode = "v" },
+        { "<leader>aq", order = 5, desc = "Stop annotation session" },
+        { "<leader>aw", order = 6, desc = "Toggle annotation panel" },
       })
     end,
   },

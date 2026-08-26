@@ -14,6 +14,15 @@ local function read_lines(path)
   return vim.fn.readfile(path)
 end
 
+local function project_root(path)
+  local marker = vim.fs.find({ ".git", "pyproject.toml", "package.json", "Makefile" }, {
+    path = vim.fs.dirname(path),
+    upward = true,
+    limit = 1,
+  })[1]
+  return marker and vim.fs.dirname(marker) or vim.fn.getcwd()
+end
+
 local function annotation_location(line)
   local file, start_line, end_line = line:match("`([^`]+):(%d+)-(%d+)`")
   if file then return file, tonumber(start_line), tonumber(end_line) end
@@ -120,10 +129,17 @@ function M.visual_selection()
 
   local path = vim.api.nvim_buf_get_name(bufnr)
   if path == "" then return nil end
+  local root = normalize(project_root(path))
+  local project_relative = path:sub(#root + 2)
+  if project_relative == "" or project_relative == path then
+    project_relative = vim.fn.fnamemodify(path, ":.")
+  end
   return {
     bufnr = bufnr,
     path = normalize(path),
-    relative_path = vim.fn.fnamemodify(path, ":."),
+    relative_path = project_relative,
+    working_directory = vim.fn.getcwd(),
+    project_root = root,
     directory = normalize(vim.fn.fnamemodify(path, ":h")),
     filetype = vim.bo[bufnr].filetype,
     start_line = start_line,
@@ -150,11 +166,15 @@ local function payload(selection, opts)
     "# Neovim Context",
     "",
     "- File: " .. selection.path,
-    "- Relative path: " .. selection.relative_path,
+    "- Project-relative path: " .. selection.relative_path,
+    "- Working directory: " .. selection.working_directory,
+    "- Working-directory path: " .. vim.fn.fnamemodify(selection.path, ":."),
+    "- Project root: " .. selection.project_root,
     "- Containing folder: " .. selection.directory,
     "- File type: " .. (selection.filetype ~= "" and selection.filetype or "plain text"),
     "- Lines: " .. selection.start_line .. "-" .. selection.end_line,
-    "- Columns: " .. selection.start_col .. "-" .. selection.end_col,
+    "- Columns: "
+      .. (selection.mode == "V" and "entire line(s)" or (selection.start_col .. "-" .. selection.end_col)),
     "- Selection mode: " .. selection.mode,
     "- Captured: " .. os.date("%Y-%m-%d %H:%M:%S %z"),
     "- Buffer modified: " .. (selection.modified and "yes" or "no"),

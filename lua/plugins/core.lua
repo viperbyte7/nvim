@@ -74,11 +74,7 @@ return {
         -- Paths: full path, project-relative path, then directory.
         { "<leader>yp", desc = "Copy full path" }, { "<leader>yr", desc = "Copy relative path" },
         { "<leader>yd", desc = "Copy containing folder" },
-        { "<leader>ys", desc = "Copy selected text context", mode = "v" },
-        { "<leader>yc", desc = "Copy selection, annotations, and instruction", mode = "v" },
-        { "<leader>ya", group = "Annotate, save, and copy", mode = "v" },
-        { "<leader>yac", desc = "Concise annotation, save, and copy", mode = "v" },
-        { "<leader>yam", desc = "Multiline annotation, save, and copy", mode = "v" },
+        { "<leader>yc", desc = "Copy selection with request", mode = "v" },
       })
     end,
   },

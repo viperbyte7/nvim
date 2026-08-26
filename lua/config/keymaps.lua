@@ -42,12 +42,10 @@ end, { desc = "Copy relative path" })
 map("n", "<leader>yd", function() notify_copy("containing folder", vim.fn.expand("%:p:h")) end,
   { desc = "Copy containing folder" })
 
--- Copy portable context for Codex or any other application: <leader>y*
+-- Copy a temporary request context for Codex or any other application.
 local context = require("utils.context")
-map("v", "<leader>ys", function() context.copy_visual() end,
-  { desc = "Copy selected text context" })
-map("v", "<leader>yc", function() context.prompt_visual({ include_annotations = true }) end,
-  { desc = "Copy selection, annotations, and instruction" })
+map("v", "<leader>yc", function() context.prompt_visual() end,
+  { desc = "Copy selection with request" })
 
 -- Markdown navigation: <leader>m*
 map("n", "<leader>mt", function()

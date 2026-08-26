@@ -57,10 +57,7 @@ menu.
 
 <leader>y  Copy / share
   yp/yr/yd  Full / relative / containing folder
-  ys        Copy selected text context
-  yc        Copy selection, annotations, and prompted instruction
-  ya        Annotate, save, and copy
-    c/m     Concise / multiline annotation, then copy
+  yc        Copy selected text and a prompted request
 ```
 
 ## Annotation workflow
@@ -74,19 +71,14 @@ document.md.review.md
 ```
 
 Review files are intentionally ignored by Git. The `<leader>yc` context action
-reads the adjacent `.review.md` sidecar and includes only annotations whose
-recorded line range overlaps the selected text.
-
-The `<leader>yac` and `<leader>yam` actions start or resume Mole, collect a new
-concise or multiline annotation, write it to the sidecar, and then copy the
-original selection plus that new annotation to the clipboard.
+does not read or write Mole. It is a temporary request packet for Codex,
+Claude, a terminal, or any other application.
 
 `<leader>yc` prompts for an instruction, then copies a Markdown payload to the
 system clipboard. It includes the full path, relative path, line and column
-range, timestamp, file type, modified-buffer status, selected text, the
-instruction, and related Mole annotations. Paste it into Codex, Claude, a
-terminal, or any other application. Neovim does not start an AI process or
-make edits automatically.
+range, timestamp, file type, modified-buffer status, selected text, and the
+request. Paste it into Codex, Claude, a terminal, or any other application.
+Neovim does not start an AI process or make edits automatically.
 
 ## Installation
 

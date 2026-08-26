@@ -49,6 +49,42 @@ map("v", "<leader>yc", function() context.prompt_visual() end,
 map("v", "<leader>ym", function() context.prompt_visual_multiline() end,
   { desc = "Copy selection with multiline request" })
 
+-- Window navigation and sizing. These are native Neovim operations with
+-- convenient direct shortcuts; the <leader>v* aliases keep them discoverable.
+local window_directions = { h = "left", j = "down", k = "up", l = "right" }
+for key, direction in pairs(window_directions) do
+  map("n", "<C-" .. key .. ">", "<C-w>" .. key, { desc = "Focus " .. direction .. " window" })
+  map("n", "<leader>v" .. key, "<C-w>" .. key, { desc = "Focus " .. direction .. " window" })
+end
+map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+map("n", "<leader>v=", "<C-w>=", { desc = "Equalize window sizes" })
+
+local maximized_layouts = {}
+local function toggle_maximize()
+  local tabpage = vim.api.nvim_get_current_tabpage()
+  local saved_layout = maximized_layouts[tabpage]
+  if saved_layout then
+    vim.cmd(saved_layout)
+    maximized_layouts[tabpage] = nil
+    vim.notify("Restored window layout")
+    return
+  end
+
+  if #vim.api.nvim_tabpage_list_wins(tabpage) < 2 then
+    vim.notify("Only one window is open", vim.log.levels.INFO)
+    return
+  end
+
+  maximized_layouts[tabpage] = vim.fn.winrestcmd()
+  vim.cmd("wincmd _")
+  vim.cmd("wincmd |")
+  vim.notify("Maximized current window")
+end
+map("n", "<leader>vx", toggle_maximize, { desc = "Maximize/restore current window" })
+
 -- Markdown navigation: <leader>m*
 map("n", "<leader>mt", function()
   local count = #vim.api.nvim_list_wins()

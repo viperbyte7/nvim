@@ -180,6 +180,11 @@ mode mappings.
   ps        Search text using a prompt
   pl        Open Lazy.nvim
 
+<leader>v  Windows
+  vh/vj/vk/vl  Focus left/down/up/right window
+  v=        Equalize window sizes
+  vx        Maximize or restore the current window
+
 <leader>w  Writing
   ws        Toggle spell-checking
   ww        Toggle word wrap
@@ -196,6 +201,27 @@ mode mappings.
 Native Visual-mode `y` remains the fastest way to copy only selected text. The
 configuration sets `clipboard = "unnamedplus"`, so ordinary yanks use the
 system clipboard as well.
+
+### Window controls
+
+For fast window switching, use `<C-h>`, `<C-j>`, `<C-k>`, and `<C-l>` to move
+left, down, up, and right. Use Ctrl-arrow keys to resize the current window:
+
+```text
+<C-Up>       Increase height
+<C-Down>     Decrease height
+<C-Left>     Decrease width
+<C-Right>    Increase width
+```
+
+`<leader>vx` temporarily maximizes the current split and restores the prior
+layout when pressed again. `<leader>v=` equalizes all window sizes. These
+shortcuts are built into this configuration and do not require another
+plugin.
+
+Neovim's native equivalents remain available through the Window command:
+`<C-w>h/j/k/l` switches focus, `<C-w>=` equalizes windows, and `<C-w>_` or
+`<C-w>|` expands the current window vertically or horizontally.
 
 ## Markdown workflows
 

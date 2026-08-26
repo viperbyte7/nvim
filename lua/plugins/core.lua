@@ -29,6 +29,7 @@ return {
         { "<leader>m", group = "Markdown" },
         { "<leader>o", group = "Open elsewhere" },
         { "<leader>p", group = "Project / search" },
+        { "<leader>v", group = "Windows" },
         { "<leader>w", group = "Writing" },
         { "<leader>y", group = "Copy / share" },
 
@@ -66,6 +67,11 @@ return {
         { "<leader>pf", desc = "Find files" }, { "<leader>pg", desc = "Search project text" },
         { "<leader>ps", desc = "Search with prompt" }, { "<leader>pv", desc = "Open file browser (netrw)" },
         { "<leader>pl", desc = "Open Lazy" },
+
+        -- Windows: directional focus, then layout controls.
+        { "<leader>vh", desc = "Focus left window" }, { "<leader>vj", desc = "Focus down window" },
+        { "<leader>vk", desc = "Focus up window" }, { "<leader>vl", desc = "Focus right window" },
+        { "<leader>v=", desc = "Equalize window sizes" }, { "<leader>vx", desc = "Maximize/restore current window" },
 
         -- Writing: focus, spelling, then wrapping.
         { "<leader>wz", desc = "Toggle distraction-free mode" },

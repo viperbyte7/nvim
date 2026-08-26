@@ -4,7 +4,7 @@ return {
     cmd = { "MoleStart", "MoleStop", "MoleResume", "MoleToggle", "MoleStartHere", "MoleResumeHere" },
     dependencies = { "MunifTanjim/nui.nvim" },
     keys = {
-      { "<leader>aa", mode = "v", desc = "Annotate selection" },
+      { "<leader>a", mode = "v", desc = "Annotate selection" },
       { "<leader>as", mode = "n", desc = "Start annotation session" },
       { "<leader>aq", mode = "n", desc = "Stop annotation session" },
       { "<leader>ar", mode = "n", desc = "Resume annotation session" },
@@ -13,7 +13,7 @@ return {
     opts = {
       session_dir = vim.fn.getcwd(), capture_mode = "snippet", auto_open_panel = true, virtual_text = false,
       keys = {
-        annotate = "<leader>aa", start_session = "<leader>as", stop_session = "<leader>aq",
+        annotate = "<leader>a", start_session = "<leader>as", stop_session = "<leader>aq",
         resume_session = "<leader>ar", toggle_window = "<leader>aw",
         jump_to_location = { "<CR>", "gd" }, next_annotation = "]a", prev_annotation = "[a",
       },

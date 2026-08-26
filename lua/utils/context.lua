@@ -141,4 +141,71 @@ function M.prompt_visual(opts)
   return true
 end
 
+function M.prompt_visual_multiline()
+  local selection = M.visual_selection()
+  if not selection then
+    vim.notify("Select text from a named file first", vim.log.levels.WARN)
+    return false
+  end
+
+  local source_win = vim.api.nvim_get_current_win()
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.bo[buf].buftype = "nofile"
+  vim.bo[buf].bufhidden = "wipe"
+  vim.bo[buf].swapfile = false
+  vim.bo[buf].filetype = "markdown"
+
+  local ui = vim.api.nvim_list_uis()[1]
+  local width = math.min(90, math.max(50, (ui and ui.width or vim.o.columns) - 8))
+  local height = math.min(14, math.max(6, (ui and ui.height or vim.o.lines) - 8))
+  local win = vim.api.nvim_open_win(buf, true, {
+    relative = "editor",
+    width = width,
+    height = height,
+    col = math.floor(((ui and ui.width or vim.o.columns) - width) / 2),
+    row = math.floor(((ui and ui.height or vim.o.lines) - height) / 2),
+    style = "minimal",
+    border = "rounded",
+    title = " Context request ",
+    title_pos = "right",
+    footer = " <C-Enter> copy  <Esc>/q cancel ",
+    footer_pos = "left",
+  })
+  vim.wo[win].wrap = true
+  vim.wo[win].linebreak = true
+  vim.cmd("startinsert")
+
+  local closed = false
+  local function close()
+    if closed then return end
+    closed = true
+    if vim.api.nvim_win_is_valid(win) then vim.api.nvim_win_close(win, true) end
+    if vim.api.nvim_buf_is_valid(buf) then vim.api.nvim_buf_delete(buf, { force = true }) end
+    if vim.api.nvim_win_is_valid(source_win) then vim.api.nvim_set_current_win(source_win) end
+  end
+
+  local function cancel()
+    close()
+    vim.notify("Context copy cancelled", vim.log.levels.INFO)
+  end
+
+  local function confirm()
+    local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+    while #lines > 0 and vim.trim(lines[#lines]) == "" do table.remove(lines) end
+    local instruction = vim.trim(table.concat(lines, "\n"))
+    close()
+    if instruction == "" then
+      vim.notify("Context copy cancelled", vim.log.levels.INFO)
+      return
+    end
+    M.copy_selection(selection, { instruction = instruction })
+  end
+
+  local map_opts = { buffer = buf, noremap = true, silent = true }
+  vim.keymap.set({ "i", "n" }, "<C-CR>", confirm, map_opts)
+  vim.keymap.set({ "i", "n" }, "<Esc>", cancel, map_opts)
+  vim.keymap.set("n", "q", cancel, map_opts)
+  return true
+end
+
 return M

@@ -46,6 +46,8 @@ map("n", "<leader>yd", function() notify_copy("containing folder", vim.fn.expand
 local context = require("utils.context")
 map("v", "<leader>yc", function() context.prompt_visual() end,
   { desc = "Copy selection with request" })
+map("v", "<leader>ym", function() context.prompt_visual_multiline() end,
+  { desc = "Copy selection with multiline request" })
 
 -- Markdown navigation: <leader>m*
 map("n", "<leader>mt", function()

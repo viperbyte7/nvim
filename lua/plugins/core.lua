@@ -75,6 +75,7 @@ return {
         { "<leader>yp", desc = "Copy full path" }, { "<leader>yr", desc = "Copy relative path" },
         { "<leader>yd", desc = "Copy containing folder" },
         { "<leader>yc", desc = "Copy selection with request", mode = "v" },
+        { "<leader>ym", desc = "Copy selection with multiline request", mode = "v" },
       })
     end,
   },

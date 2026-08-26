@@ -57,7 +57,8 @@ menu.
 
 <leader>y  Copy / share
   yp/yr/yd  Full / relative / containing folder
-  yc        Copy selected text and a prompted request
+  yc        Copy selected text and a one-line request
+  ym        Copy selected text and a multiline request
 ```
 
 ## Annotation workflow
@@ -74,11 +75,13 @@ Review files are intentionally ignored by Git. The `<leader>yc` context action
 does not read or write Mole. It is a temporary request packet for Codex,
 Claude, a terminal, or any other application.
 
-`<leader>yc` prompts for an instruction, then copies a Markdown payload to the
-system clipboard. It includes the full path, relative path, line and column
-range, timestamp, file type, modified-buffer status, selected text, and the
-request. Paste it into Codex, Claude, a terminal, or any other application.
-Neovim does not start an AI process or make edits automatically.
+`<leader>yc` prompts for a one-line request, while `<leader>ym` opens a
+multiline request editor. In the multiline editor, use `<C-Enter>` to copy or
+`<Esc>`/`q` to cancel. Both actions copy a Markdown payload containing the full
+path, relative path, line and column range, timestamp, file type,
+modified-buffer status, selected text, and request. Paste it into Codex,
+Claude, a terminal, or any other application. Neovim does not start an AI
+process or make edits automatically.
 
 ## Installation
 

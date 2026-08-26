@@ -207,20 +207,25 @@ system clipboard as well.
 ### Window controls
 
 For fast window switching, use `<C-h>`, `<C-j>`, `<C-k>`, and `<C-l>` to move
-left, down, up, and right. macOS terminals often intercept Ctrl-arrow keys,
-so use the reliable leader-based resize mappings instead:
+left, down, up, and right. For one-chord resizing, use Option/Alt with
+`h/j/k/l`:
 
 ```text
-<leader>vH   Decrease width
-<leader>vL   Increase width
-<leader>vJ   Decrease height
-<leader>vK   Increase height
+<M-h>        Decrease width
+<M-l>        Increase width
+<M-j>        Decrease height
+<M-k>        Increase height
 ```
 
-`<leader>vx` temporarily maximizes the current split and restores the prior
-layout when pressed again. `<leader>v=` equalizes all window sizes. These
-shortcuts are built into this configuration and do not require another
-plugin.
+If the terminal does not pass Option/Alt as Meta, configure its Option key to
+send Esc+ or Meta. The leader-based mappings remain available as a fallback:
+`<leader>vH/vL` changes width and `<leader>vJ/vK` changes height. `<leader>vx`
+temporarily maximizes the current split and restores the prior layout when
+pressed again. `<leader>v=` equalizes all window sizes. These shortcuts are
+built into this configuration and do not require another plugin.
+
+`<` and `>` are intentionally not remapped globally because they are native
+Normal-mode indentation operators (`<<` and `>>`).
 
 Neovim's native equivalents remain available through the Window command:
 `<C-w>h/j/k/l` switches focus, `<C-w>=` equalizes windows, and `<C-w>_` or

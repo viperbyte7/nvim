@@ -29,7 +29,7 @@ map("n", "<leader>pv", vim.cmd.Ex, { desc = "Open file browser (netrw)" })
 map("n", "<leader>pf", telescope("find_files"), { desc = "Find files" })
 map("n", "<leader>pg", telescope("live_grep"), { desc = "Search project text" })
 map("n", "<leader>ps", function() require("telescope.builtin").grep_string({ search = vim.fn.input("Search > ") }) end,
-  { desc = "Search selected string" })
+  { desc = "Search with prompt" })
 map("n", "<leader>pl", vim.cmd.Lazy, { desc = "Open Lazy" })
 
 -- Copy paths: <leader>y*

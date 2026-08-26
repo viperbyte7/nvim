@@ -64,7 +64,7 @@ return {
 
         -- Project/search: find files, search text, then utilities.
         { "<leader>pf", desc = "Find files" }, { "<leader>pg", desc = "Search project text" },
-        { "<leader>ps", desc = "Search selected string" }, { "<leader>pv", desc = "Open file browser (netrw)" },
+        { "<leader>ps", desc = "Search with prompt" }, { "<leader>pv", desc = "Open file browser (netrw)" },
         { "<leader>pl", desc = "Open Lazy" },
 
         -- Writing: focus, spelling, then wrapping.

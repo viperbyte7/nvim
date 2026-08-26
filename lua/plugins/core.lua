@@ -16,7 +16,7 @@ return {
       sort = { "manual" },
       -- Visual selections use direct actions such as <leader>a; keep the popup
       -- available for normal-mode discovery without interrupting annotation.
-      triggers = { { "<auto>", mode = "n" }, { "<leader>a", mode = "v" } },
+      triggers = { { "<auto>", mode = "n" }, { "<leader>", mode = "v" } },
     },
     config = function(_, opts)
       local wk = require("which-key")

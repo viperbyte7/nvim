@@ -14,8 +14,8 @@ return {
       preset = "modern",
       delay = 250,
       sort = { "manual" },
-      -- Visual selections use direct actions such as <leader>a; keep the popup
-      -- available for normal-mode discovery without interrupting annotation.
+      -- Visual selections can use the context and annotation actions below;
+      -- keep the popup available for discovery in both modes.
       triggers = { { "<auto>", mode = "n" }, { "<leader>", mode = "v" } },
     },
     config = function(_, opts)
@@ -26,12 +26,11 @@ return {
         { "<leader>a", group = "Annotations" },
         { "<leader>c", group = "Colorschemes" },
         { "<leader>d", group = "Display" },
-        { "<leader>g", group = "Codex / AI" },
         { "<leader>m", group = "Markdown" },
         { "<leader>o", group = "Open elsewhere" },
         { "<leader>p", group = "Project / search" },
         { "<leader>w", group = "Writing" },
-        { "<leader>y", group = "Copy paths" },
+        { "<leader>y", group = "Copy / share" },
 
         -- Annotations: start/resume first, then create and manage notes.
         { "<leader>as", desc = "Start annotation session" },
@@ -54,13 +53,6 @@ return {
         { "<leader>dn", desc = "Toggle relative numbers" },
         { "<leader>dv", desc = "Toggle visible characters" },
 
-        -- Codex: open, provide context, review, then manage the session.
-        { "<leader>gg", desc = "Toggle Codex" }, { "<leader>gf", desc = "Add current file to Codex" },
-        { "<leader>gs", desc = "Send selection to Codex", mode = "v" },
-        { "<leader>ge", desc = "Edit selection with Codex", mode = "v" },
-        { "<leader>gr", desc = "Review file and annotations with Codex" },
-        { "<leader>gc", desc = "Continue Codex session" }, { "<leader>gx", desc = "Stop Codex" },
-
         -- Markdown: structural navigation before presentation tools.
         { "<leader>mo", desc = "Toggle Markdown outline" },
         { "<leader>mt", desc = "Toggle Markdown table of contents" },
@@ -82,6 +74,9 @@ return {
         -- Paths: full path, project-relative path, then directory.
         { "<leader>yp", desc = "Copy full path" }, { "<leader>yr", desc = "Copy relative path" },
         { "<leader>yd", desc = "Copy containing folder" },
+        { "<leader>ys", desc = "Copy selected text context", mode = "v" },
+        { "<leader>yc", desc = "Copy selection, annotations, and instruction", mode = "v" },
+        { "<leader>ya", desc = "Copy selection with Mole annotations", mode = "v" },
       })
     end,
   },

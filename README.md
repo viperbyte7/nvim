@@ -1,7 +1,7 @@
 # Neovim writing environment
 
 A clean, document-first Neovim configuration for Markdown reading, writing,
-annotation, navigation, and optional Codex-assisted review.
+annotation, navigation, and portable context sharing.
 
 ## Design
 
@@ -38,14 +38,6 @@ menu.
   dz        Toggle all line numbers
   dv        Toggle visible characters
 
-<leader>g  Codex / AI
-  gg        Toggle Codex terminal
-  gf        Add current file
-  gs        Send visual selection
-  ge        Edit selected text with a prompt
-  gr        Review Markdown and its .review.md sidecar
-  gc/gx     Continue / stop session
-
 <leader>m  Markdown
   mm        Toggle inline rendering
   mo        Toggle hierarchical Markdown outline
@@ -63,8 +55,11 @@ menu.
 <leader>w  Writing
   ws/ww/wz  Spell / wrap / Zen mode
 
-<leader>y  Copy paths
+<leader>y  Copy / share
   yp/yr/yd  Full / relative / containing folder
+  ys        Copy selected text context
+  yc        Copy selection, annotations, and prompted instruction
+  ya        Copy selection with related Mole annotations
 ```
 
 ## Annotation workflow
@@ -77,22 +72,16 @@ or resumes automatically. Mole stores the review beside the source as:
 document.md.review.md
 ```
 
-Review files are intentionally ignored by Git. Press `<leader>gr` to give
-Codex both the Markdown file and its annotation sidecar. Codex remains the
-source of truth for its own conversation and approval workflow.
+Review files are intentionally ignored by Git. The `<leader>ya` and
+`<leader>yc` context actions read the adjacent `.review.md` sidecar and include
+only annotations whose recorded line range overlaps the selected text.
 
-To ask Codex to edit selected text, press `<leader>ge`, enter an instruction,
-and approve the resulting edit in Codex. The generated instruction tells Codex
-to preserve text outside the selection and avoid unrelated files. Use
-`<leader>gs` when you want to discuss the selection without explicitly
-requesting an edit.
-
-## Codex
-
-The optional [`codex.nvim`](https://github.com/nwiizo/codex.nvim) integration
-uses the Codex CLI terminal backend. It requires Neovim 0.12+ and `codex` on
-`PATH`; no API key is stored in this repository. Run `:CodexHealth` if the
-integration needs diagnosis.
+`<leader>yc` prompts for an instruction, then copies a Markdown payload to the
+system clipboard. It includes the full path, relative path, line and column
+range, timestamp, file type, modified-buffer status, selected text, the
+instruction, and related Mole annotations. Paste it into Codex, Claude, a
+terminal, or any other application. Neovim does not start an AI process or
+make edits automatically.
 
 ## Installation
 

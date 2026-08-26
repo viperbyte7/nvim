@@ -178,17 +178,19 @@ local function payload(selection, opts)
     "- Selection mode: " .. selection.mode,
     "- Captured: " .. os.date("%Y-%m-%d %H:%M:%S %z"),
     "- Buffer modified: " .. (selection.modified and "yes" or "no"),
-    "",
-    "## Instruction",
-    "",
-    instruction ~= "" and instruction or "No additional instruction supplied.",
+  }
+
+  if instruction ~= "" then
+    vim.list_extend(lines, { "", "## Instruction", "", instruction })
+  end
+  vim.list_extend(lines, {
     "",
     "## Selected text",
     "",
     fence .. (selection.filetype or ""),
     selection.text,
     fence,
-  }
+  })
 
   if opts.annotation then
     table.insert(lines, "")

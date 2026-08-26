@@ -71,6 +71,8 @@ return {
         -- Windows: directional focus, then layout controls.
         { "<leader>vh", desc = "Focus left window" }, { "<leader>vj", desc = "Focus down window" },
         { "<leader>vk", desc = "Focus up window" }, { "<leader>vl", desc = "Focus right window" },
+        { "<leader>vH", desc = "Decrease window width" }, { "<leader>vL", desc = "Increase window width" },
+        { "<leader>vJ", desc = "Decrease window height" }, { "<leader>vK", desc = "Increase window height" },
         { "<leader>v=", desc = "Equalize window sizes" }, { "<leader>vx", desc = "Maximize/restore current window" },
 
         -- Writing: focus, spelling, then wrapping.

@@ -182,6 +182,8 @@ mode mappings.
 
 <leader>v  Windows
   vh/vj/vk/vl  Focus left/down/up/right window
+  vH/vL     Decrease/increase window width
+  vJ/vK     Decrease/increase window height
   v=        Equalize window sizes
   vx        Maximize or restore the current window
 
@@ -205,13 +207,14 @@ system clipboard as well.
 ### Window controls
 
 For fast window switching, use `<C-h>`, `<C-j>`, `<C-k>`, and `<C-l>` to move
-left, down, up, and right. Use Ctrl-arrow keys to resize the current window:
+left, down, up, and right. macOS terminals often intercept Ctrl-arrow keys,
+so use the reliable leader-based resize mappings instead:
 
 ```text
-<C-Up>       Increase height
-<C-Down>     Decrease height
-<C-Left>     Decrease width
-<C-Right>    Increase width
+<leader>vH   Decrease width
+<leader>vL   Increase width
+<leader>vJ   Decrease height
+<leader>vK   Increase height
 ```
 
 `<leader>vx` temporarily maximizes the current split and restores the prior

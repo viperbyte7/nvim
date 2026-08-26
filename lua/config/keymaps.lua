@@ -56,10 +56,10 @@ for key, direction in pairs(window_directions) do
   map("n", "<C-" .. key .. ">", "<C-w>" .. key, { desc = "Focus " .. direction .. " window" })
   map("n", "<leader>v" .. key, "<C-w>" .. key, { desc = "Focus " .. direction .. " window" })
 end
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+map("n", "<leader>vH", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+map("n", "<leader>vL", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+map("n", "<leader>vJ", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+map("n", "<leader>vK", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 map("n", "<leader>v=", "<C-w>=", { desc = "Equalize window sizes" })
 
 local maximized_layouts = {}

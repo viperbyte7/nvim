@@ -10,7 +10,13 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    opts = { preset = "modern", delay = 250 },
+    opts = {
+      preset = "modern",
+      delay = 250,
+      -- Visual selections use direct actions such as <leader>a; keep the popup
+      -- available for normal-mode discovery without interrupting annotation.
+      triggers = { { "<auto>", mode = "n" } },
+    },
     config = function(_, opts)
       local wk = require("which-key")
       wk.setup(opts)

@@ -92,6 +92,12 @@ end
 
 function M.visual_selection()
   local bufnr = vim.api.nvim_get_current_buf()
+  -- Visual marks are finalized when Visual mode exits. Do that before reading
+  -- them so mappings invoked directly from a live selection are reliable.
+  local mode = vim.fn.mode()
+  if mode == "v" or mode == "V" or mode == "\22" then
+    vim.api.nvim_feedkeys(vim.keycode("<Esc>"), "x", false)
+  end
   local start = vim.api.nvim_buf_get_mark(bufnr, "<")
   local finish = vim.api.nvim_buf_get_mark(bufnr, ">")
   if start[1] == 0 or finish[1] == 0 then return nil end

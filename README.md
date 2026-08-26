@@ -42,6 +42,7 @@ menu.
   gg        Toggle Codex terminal
   gf        Add current file
   gs        Send visual selection
+  ge        Edit selected text with a prompt
   gr        Review Markdown and its .review.md sidecar
   gc/gx     Continue / stop session
 
@@ -68,8 +69,9 @@ menu.
 
 ## Annotation workflow
 
-Open a Markdown file, press `<leader>as`, visually select text and press
-`<leader>aa`. Mole stores the review beside the source as:
+Open a Markdown file and visually select text. Press `<leader>ac` or
+`<leader>am` to add a concise or multiline Mole annotation; the session starts
+or resumes automatically. Mole stores the review beside the source as:
 
 ```text
 document.md.review.md
@@ -78,6 +80,12 @@ document.md.review.md
 Review files are intentionally ignored by Git. Press `<leader>gr` to give
 Codex both the Markdown file and its annotation sidecar. Codex remains the
 source of truth for its own conversation and approval workflow.
+
+To ask Codex to edit selected text, press `<leader>ge`, enter an instruction,
+and approve the resulting edit in Codex. The generated instruction tells Codex
+to preserve text outside the selection and avoid unrelated files. Use
+`<leader>gs` when you want to discuss the selection without explicitly
+requesting an edit.
 
 ## Codex
 

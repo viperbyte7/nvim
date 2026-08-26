@@ -57,6 +57,7 @@ return {
         -- Codex: open, provide context, review, then manage the session.
         { "<leader>gg", desc = "Toggle Codex" }, { "<leader>gf", desc = "Add current file to Codex" },
         { "<leader>gs", desc = "Send selection to Codex", mode = "v" },
+        { "<leader>ge", desc = "Edit selection with Codex", mode = "v" },
         { "<leader>gr", desc = "Review file and annotations with Codex" },
         { "<leader>gc", desc = "Continue Codex session" }, { "<leader>gx", desc = "Stop Codex" },
 

@@ -168,7 +168,7 @@ function M.prompt_visual_multiline()
     border = "rounded",
     title = " Context request ",
     title_pos = "right",
-    footer = " <C-Enter>/<leader><Enter> copy  <Esc>/q cancel ",
+    footer = " <C-Space>/<C-Enter> copy  <Esc>/q cancel ",
     footer_pos = "left",
   })
   vim.wo[win].wrap = true
@@ -209,7 +209,7 @@ function M.prompt_visual_multiline()
   -- set of request actions below is buffer-local.
   local map_opts = { buffer = buf, noremap = true, silent = true }
   vim.keymap.set({ "i", "n" }, "<C-CR>", confirm, map_opts)
-  vim.keymap.set({ "i", "n" }, "<leader><CR>", confirm, map_opts)
+  vim.keymap.set({ "i", "n" }, "<C-Space>", confirm, map_opts)
   -- In Insert mode <Esc> should enter Normal mode so motions and basic edits
   -- work normally. Press <Esc> again in Normal mode to cancel, as in Mole.
   vim.keymap.set("n", "<Esc>", cancel, map_opts)

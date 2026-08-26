@@ -16,6 +16,12 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# Neovim runtime state and local artifacts
+lazy-lock.local.json
+*.swp
+*.swo
+*.review.md
+
 # Windows system files
 Thumbs.db
 desktop.ini

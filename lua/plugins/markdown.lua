@@ -1,5 +1,24 @@
 return {
   {
+    "hedyhli/outline.nvim",
+    cmd = { "Outline", "OutlineOpen" },
+    keys = { { "<leader>mo", "<cmd>Outline<cr>", desc = "Toggle Markdown outline" } },
+    opts = {
+      outline_window = {
+        position = "right",
+        width = 0.25,
+        relative_width = true,
+        auto_close = false,
+        focus_on_open = true,
+        show_numbers = false,
+        show_relative_numbers = false,
+      },
+      providers = { priority = { "markdown" } },
+      guides = { enabled = true },
+      symbol_folding = { autofold_depth = 1 },
+    },
+  },
+  {
     "MeanderingProgrammer/render-markdown.nvim",
     ft = "markdown",
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },

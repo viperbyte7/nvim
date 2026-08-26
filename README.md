@@ -46,6 +46,7 @@ menu.
 
 <leader>m  Markdown
   mm        Toggle inline rendering
+  mo        Toggle hierarchical Markdown outline
   mt        Toggle heading table of contents
 
 <leader>o  Open elsewhere

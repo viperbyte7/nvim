@@ -207,18 +207,18 @@ system clipboard as well.
 ### Window controls
 
 For fast window switching, use `<C-h>`, `<C-j>`, `<C-k>`, and `<C-l>` to move
-left, down, up, and right. For one-chord resizing, use Option/Alt with
-`h/j/k/l`:
+left, down, up, and right. For one-chord resizing, use Shift with the arrow
+keys:
 
 ```text
-<M-h>        Decrease width
-<M-l>        Increase width
-<M-j>        Decrease height
-<M-k>        Increase height
+<S-Left>     Decrease width
+<S-Right>    Increase width
+<S-Down>     Decrease height
+<S-Up>       Increase height
 ```
 
-If the terminal does not pass Option/Alt as Meta, configure its Option key to
-send Esc+ or Meta. The leader-based mappings remain available as a fallback:
+Option/Alt plus `h/j/k/l` is also supported when the terminal passes Option as
+Meta. The leader-based mappings remain available as a fallback:
 `<leader>vH/vL` changes width and `<leader>vJ/vK` changes height. `<leader>vx`
 temporarily maximizes the current split and restores the prior layout when
 pressed again. `<leader>v=` equalizes all window sizes. These shortcuts are

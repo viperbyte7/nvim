@@ -6,8 +6,8 @@ return {
     opts = {
       outline_window = {
         position = "right",
-        width = 0.25,
-        relative_width = true,
+        width = 40,
+        relative_width = false,
         auto_close = false,
         auto_jump = true,
         focus_on_open = true,

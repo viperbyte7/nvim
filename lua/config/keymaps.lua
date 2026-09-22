@@ -23,6 +23,14 @@ map("n", "<leader>dz", function()
 end, { desc = "Toggle all line numbers" })
 map("n", "<leader>dv", function() vim.opt.list = not vim.opt.list:get() end,
   { desc = "Toggle visible characters" })
+map("n", "<leader>dh", function()
+  vim.opt.hlsearch = not vim.opt.hlsearch:get()
+  if not vim.opt.hlsearch:get() then vim.cmd("nohlsearch") end
+end, { desc = "Toggle search highlighting" })
+map("n", "<leader>di", function()
+  vim.opt.incsearch = not vim.opt.incsearch:get()
+  vim.notify("Incremental search: " .. (vim.opt.incsearch:get() and "on" or "off"))
+end, { desc = "Toggle incremental search" })
 
 -- Project and search: <leader>p*
 map("n", "<leader>pv", vim.cmd.Ex, { desc = "Open file browser (netrw)" })

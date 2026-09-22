@@ -53,11 +53,14 @@ return {
         { "<leader>dz", desc = "Toggle all line numbers" },
         { "<leader>dn", desc = "Toggle relative numbers" },
         { "<leader>dv", desc = "Toggle visible characters" },
+        { "<leader>dh", desc = "Toggle search highlighting" },
+        { "<leader>di", desc = "Toggle incremental search" },
 
         -- Markdown: structural navigation before presentation tools.
         { "<leader>mo", desc = "Toggle Markdown outline" },
         { "<leader>mt", desc = "Toggle Markdown table of contents" },
         { "<leader>mm", desc = "Toggle inline rendering" },
+        { "<leader>mc", desc = "Toggle Markdown conceal" },
 
         -- External applications: default application before named editors.
         { "<leader>of", desc = "Open in default application" }, { "<leader>ov", desc = "Open in VS Code" },

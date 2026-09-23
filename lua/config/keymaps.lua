@@ -31,6 +31,7 @@ map("n", "<leader>di", function()
   vim.opt.incsearch = not vim.opt.incsearch:get()
   vim.notify("Incremental search: " .. (vim.opt.incsearch:get() and "on" or "off"))
 end, { desc = "Toggle incremental search" })
+map("n", "<leader>dm", "<cmd>MarksToggleSigns<cr>", { desc = "Toggle mark signs" })
 
 -- Project and search: <leader>p*
 map("n", "<leader>pv", vim.cmd.Ex, { desc = "Open file browser (netrw)" })
@@ -136,7 +137,7 @@ map("n", "<leader>wz", "<cmd>ZenMode<cr>", { desc = "Toggle distraction-free mod
 -- Themes: <leader>c*
 local themes = {
   ct = "tokyonight-night", co = "onedark", cc = "catppuccin-mocha", ck = "kanagawa-wave",
-  cg = "gruvbox", cr = "rose-pine", ce = "everforest", cn = "nightfox",
+  cg = "gruvbox", cd = "default", ch = "kanagawa-dragon", cm = "tokyonight-storm",
 }
 for key, theme in pairs(themes) do
   map("n", "<leader>" .. key, function() vim.cmd.colorscheme(theme) end, { desc = "Use " .. theme })

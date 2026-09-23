@@ -1,6 +1,11 @@
 return {
   { "nvim-lua/plenary.nvim", lazy = true },
   {
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.8",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -45,8 +50,8 @@ return {
         -- Colorschemes: common choices first, chooser last.
         { "<leader>ct", desc = "Use Tokyonight" }, { "<leader>cc", desc = "Use Catppuccin" },
         { "<leader>cg", desc = "Use Gruvbox" }, { "<leader>ck", desc = "Use Kanagawa" },
-        { "<leader>co", desc = "Use Onedark" }, { "<leader>cr", desc = "Use Rose Pine" },
-        { "<leader>ce", desc = "Use Everforest" }, { "<leader>cn", desc = "Use Nightfox" },
+        { "<leader>co", desc = "Use Onedark" }, { "<leader>cd", desc = "Use default" },
+        { "<leader>ch", desc = "Use Kanagawa Dragon" }, { "<leader>cm", desc = "Use TokyoNight Storm" },
         { "<leader>cs", desc = "Choose colorscheme" },
 
         -- Display: broad visibility controls first.
@@ -55,6 +60,7 @@ return {
         { "<leader>dv", desc = "Toggle visible characters" },
         { "<leader>dh", desc = "Toggle search highlighting" },
         { "<leader>di", desc = "Toggle incremental search" },
+        { "<leader>dm", desc = "Toggle mark signs" },
 
         -- Markdown: structural navigation before presentation tools.
         { "<leader>mo", desc = "Toggle Markdown outline" },

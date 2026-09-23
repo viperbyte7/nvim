@@ -3,7 +3,7 @@ return {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    config = function() vim.cmd.colorscheme("tokyonight-night") end,
+    config = function() vim.cmd.colorscheme("kanagawa-dragon") end,
   },
   { "navarasu/onedark.nvim", lazy = false, priority = 1000 },
   { "catppuccin/nvim", name = "catppuccin", lazy = false, priority = 1000, opts = { flavour = "mocha" } },
